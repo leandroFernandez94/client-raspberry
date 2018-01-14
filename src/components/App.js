@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 
 import AppHeader from "./Header/Header.component";
+import TabContent from "./TabContent/TabContent.component";
 
 import './App.css'
 
-const { Header, Content, Footer } = Layout;
-
-
 class App extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.handleTabChange = this.handleTabChange.bind(this);
+  }
+
+  handleTabChange(tabSelected){
+    console.log(`tab selected: ${tabSelected.key}`)
+  }
+
   render() {
     return (
       <Layout>
-        <AppHeader />
-        <Content style={{ padding: '0 50px' }}>
-          <div style={{ background: '#fff', padding: 24 }}>Content</div>
-        </Content>
+        <AppHeader onTabChange={this.handleTabChange}/>
+        <TabContent />
       </Layout>
     )
   }

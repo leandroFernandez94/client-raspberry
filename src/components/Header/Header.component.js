@@ -1,29 +1,36 @@
-import React, { Component } from 'react';
-import { Layout, Menu } from 'antd';
+import React from 'react'
+import { Layout, Menu } from 'antd'
+
+import { tabs } from '../../services/Header.service';
 
 import './Header.css'
 
-const { Header } = Layout;
+const { Header } = Layout
 
-class AppHeader extends Component {
-  render() {
-    return (
-      <Header className="header">
-          <Menu
-            className="menu"
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['1']}
-          >
-            <Menu.Item key="1">Movies</Menu.Item>
-            <Menu.Item key="2">Photos</Menu.Item>
-            <Menu.Item key="3">TV Shows</Menu.Item>
-            <Menu.Item key="4">Concerts</Menu.Item>
-            <Menu.Item key="5">Backups</Menu.Item>
-          </Menu>
-        </Header>
-    );
-  }
+const itemComponents = tabs.map(
+    tab => <Menu.Item key={tab.name}>{tab.placeholder}</Menu.Item>
+  )
+
+const findDefaultKey = () => {
+  const defaultTab = tabs.find(
+    tab => tab.default
+  ) || tabs[0]
+
+  return new Array(defaultTab.name)
 }
+
+const AppHeader = ({onTabChange}) => (
+  <Header className="header">
+    <Menu
+      className="menu"
+      theme="dark"
+      mode="horizontal"
+      onSelect={onTabChange}
+      defaultSelectedKeys={findDefaultKey()}
+    >
+      { itemComponents }
+    </Menu>
+  </Header>
+)
 
 export default AppHeader;
