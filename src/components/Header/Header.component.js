@@ -1,23 +1,17 @@
 import React from 'react'
 import { Layout, Menu } from 'antd'
+import { NavLink } from 'react-router-dom'
 
-import { tabs } from '../../services/Header.service';
+import { tabs, findDefaultTab } from '../../services/Header.service';
 
 import './Header.css'
 
 const { Header } = Layout
 
 const itemComponents = tabs.map(
-    tab => <Menu.Item key={tab.name}>{tab.placeholder}</Menu.Item>
+    tab => <Menu.Item key={tab.name}><NavLink to={tab.link}>{tab.placeholder}</NavLink></Menu.Item>
   )
 
-const findDefaultKey = () => {
-  const defaultTab = tabs.find(
-    tab => tab.default
-  ) || tabs[0]
-
-  return new Array(defaultTab.name)
-}
 
 const AppHeader = ({onTabChange}) => (
   <Header className="header">
@@ -26,7 +20,7 @@ const AppHeader = ({onTabChange}) => (
       theme="dark"
       mode="horizontal"
       onSelect={onTabChange}
-      defaultSelectedKeys={findDefaultKey()}
+      defaultSelectedKeys={[findDefaultTab().name]}
     >
       { itemComponents }
     </Menu>

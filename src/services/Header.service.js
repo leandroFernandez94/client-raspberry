@@ -2,22 +2,33 @@ export const tabs = [
   {
     name:'movies',
     placeholder: 'Movies',
+    link: '/movies',
+    default: true
   },
   {
     name:'photos',
     placeholder: 'Photos',
-    default: true
+    link: '/photos'
   },
   {
     name: 'series',
-    placeholder: 'TV Shows'
+    placeholder: 'TV Shows',
+    link: '/series'
   },
   {
     name:'concerts',
-    placeholder: 'Concerts'
+    placeholder: 'Concerts',
+    link: '/concerts'
   },
   {
     name: 'backups',
-    placeholder: 'Backups'
+    placeholder: 'Backups',
+    link: '/backups'
   }
 ]
+
+export const findDefaultTab = () => {
+  return tabs.find(
+    tab => tab.default
+  ) || tabs[0]
+}

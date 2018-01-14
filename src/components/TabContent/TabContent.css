@@ -1,0 +1,9 @@
+.container {
+  padding: 0 50px;
+  margin-top: 64px;
+  z-index: 0;
+}
+
+.content {
+  padding: 14px;
+}
