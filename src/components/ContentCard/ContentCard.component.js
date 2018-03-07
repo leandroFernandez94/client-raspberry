@@ -5,16 +5,18 @@ import "./ContentCard.css";
 
 const { Meta } = Card
 
-const ContentCard = ({children}) => {
+const ContentCard = ({ children, onItemClick }) => {
+  const { filename } = children
   return (
     <Card
-      className="card" 
+      className="card"
       hoverable
       cover={<h1>Movie picture</h1>}
+      onClick={() => onItemClick(filename)}
     >
       <Meta
-        title={children}
-        description ={'details...'}
+        title={filename}
+        description={'generos...'}
       />
 
     </Card>
