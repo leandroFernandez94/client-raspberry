@@ -1,22 +1,21 @@
 import React from 'react';
 import { Card } from 'antd';
+import * as moment from 'moment';
 
 import "./ContentCard.css";
 
 const { Meta } = Card
 
-const ContentCard = ({ children, onItemClick }) => {
-  const { filename } = children
+const ContentCard = ({title, posterPath, releaseDate}) => {
   return (
     <Card
       className="card"
       hoverable
-      cover={<h1>Movie picture</h1>}
-      onClick={() => onItemClick(filename)}
+      cover={<img alt="noimg" src={posterPath} />}
     >
       <Meta
-        title={filename}
-        description={'generos...'}
+        title={title}
+        description={moment(releaseDate).format('(YYYY)')}
       />
 
     </Card>

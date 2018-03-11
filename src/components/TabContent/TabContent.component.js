@@ -27,12 +27,13 @@ class TabContent extends Component {
   componentDidMount() {
     fetchLibraryData(this.props.tab)
       .then(
-      resp => this.setState({
-        files: resp.data.files,
-        directories: resp.data.directories,
+      resp =>{ 
+        console.log('movies found', resp)
+        this.setState({
+        directories: resp.data,
         loading: false
       })
-      )
+      })
   }
 
   handleItemClick(item){
@@ -50,9 +51,13 @@ class TabContent extends Component {
           {
             this.state.loading ?
               <Spin className="spin"/>
-              : this.state.directories.map(dir => (
-                <Link key={dir} to={`/${tab}/${dir}`}>
-                  <ContentCard onItemClick={this.handleItemClick}>{{filename: dir}}</ContentCard>
+              : this.state.directories.map(dirData => (
+                <Link key={dirData.id} to={`/${tab}/${dirData.id}`}>
+                  <ContentCard 
+                    title={dirData.title}
+                    posterPath={dirData.posterPath}
+                    releaseDate={dirData.releaseDate}
+                  />
                 </Link>
               ))
           }
